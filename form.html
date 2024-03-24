@@ -1,0 +1,56 @@
+<form id="myForm">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter your username">
+    <div id="usernameError" class="error"></div>
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="Enter your email">
+    <div id="emailError" class="error"></div>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+
+<style>
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+</style>
+
+<script>
+document.getElementById('myForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form submission
+  
+  // Get form values
+  var username = document.getElementById('username').value.trim();
+  var email = document.getElementById('email').value.trim();
+  
+  // Reset error messages
+  document.getElementById('usernameError').innerText = '';
+  document.getElementById('emailError').innerText = '';
+  
+  // Validate username
+  if (username === '') {
+    document.getElementById('usernameError').innerText = 'Username is required';
+    return false; // Stop further processing
+  }
+  
+  // Validate email
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email === '') {
+    document.getElementById('emailError').innerText = 'Email is required';
+    return false; // Stop further processing
+  } else if (!emailPattern.test(email)) {
+    document.getElementById('emailError').innerText = 'Invalid email format';
+    return false; // Stop further processing
+  }
+  
+  // If all validations pass, you can submit the form
+  console.log('Form submitted successfully');
+});
+
+</script>
